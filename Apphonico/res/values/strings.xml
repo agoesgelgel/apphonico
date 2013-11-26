@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Apphonico</string>
+    <string name="action_settings">Settings</string>
+    <string name="clear_text">Clear Text</string>
+    <string name="speak">Speak!</string>
+    <string name="shutup">Shut up!</string>
+    <string name="speaking">Speaking!</string>
+    <string name="voice_options">Voice Options</string>
+    <string name="decrease_pitch">Decrease Pitch</string>
+    <string name="increment_pitch">Increment Pitch</string>
+    <string name="decrease_rate">Decrease Rate</string>
+    <string name="increment_rate">Increment Rate</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Apphonico</string>
+    <string name="action_settings">Configuración</string>
+    <string name="clear_text">Borrar texto</string>
+    <string name="speak">Hablar</string>
+    <string name="shutup">Callar</string>
+    <string name="speaking">¡Hablando!</string>
+    <string name="voice_options">Opciones de Voz</string>
+    <string name="decrease_pitch">Menos pitch</string>
+    <string name="increment_pitch">Más pitch</string>
+    <string name="decrease_rate">Más velocidad</string>
+    <string name="increment_rate">Menos velocidad</string>
+
+</resources>
