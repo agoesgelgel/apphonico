@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Apphonico</string>
+    <string name="action_settings">Configutarion</string>
+    <string name="clear_text">Supprimer texte</string>
+    <string name="speak">Parler</string>
+    <string name="shutup">Tas-toi</string>
+    <string name="speaking">Parlant!</string>
+    <string name="voice_options">Options Vocales</string>
+    <string name="decrease_pitch">Moins pitch</string>
+    <string name="increment_pitch">Plus pitch</string>
+    <string name="decrease_rate">Plus velocidad</string>
+    <string name="increment_rate">Moins velocidad</string>
+
+</resources>
