@@ -12,5 +12,6 @@
     <string name="increment_pitch">Más pitch</string>
     <string name="decrease_rate">Más velocidad</string>
     <string name="increment_rate">Menos velocidad</string>
+    <string name="tts_failed">¡Lo sentimos! El sistema TTS falló&#8230;</string>
 
 </resources>

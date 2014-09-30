@@ -12,5 +12,6 @@
     <string name="increment_pitch">Increment Pitch</string>
     <string name="decrease_rate">Decrease Rate</string>
     <string name="increment_rate">Increment Rate</string>
+    <string name="tts_failed">Sorry! Text To Speech failed&#8230;</string>
 
 </resources>

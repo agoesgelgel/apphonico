@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Apphonico</string>
-    <string name="action_settings">Configutarion</string>
+    <string name="action_settings">Configuration</string>
     <string name="clear_text">Supprimer texte</string>
     <string name="speak">Parler</string>
     <string name="shutup">Tas-toi</string>
@@ -12,5 +12,6 @@
     <string name="increment_pitch">Plus pitch</string>
     <string name="decrease_rate">Plus velocidad</string>
     <string name="increment_rate">Moins velocidad</string>
+    <string name="tts_failed">Je suis désolé! TTS échoué&#8230;</string>
 
 </resources>

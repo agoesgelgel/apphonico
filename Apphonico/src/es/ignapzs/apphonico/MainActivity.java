@@ -1,9 +1,9 @@
-package es.ignapziriza.apphonico;
+package es.ignapzs.apphonico;
 
 import java.util.HashMap;
 import java.util.Locale;
 
-import es.migrupo.apphonico.R;
+import es.ignapzs.apphonico.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -215,8 +215,8 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		} else if (initStatus == TextToSpeech.ERROR) {
 			Log.e(getResources().getString(R.string.app_name),
-					"onInitStatus()- ERROR - Sorry! Text To Speech failed...");
-			Toast.makeText(this, "Sorry! Text To Speech failed...",
+					"onInitStatus()- ERROR - " + getString(R.string.tts_failed));
+			Toast.makeText(this, getString(R.string.tts_failed),
 					Toast.LENGTH_LONG).show();
 		}
 		if (initStatus == TextToSpeech.SUCCESS) {
