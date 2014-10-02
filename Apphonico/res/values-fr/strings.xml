@@ -13,5 +13,7 @@
     <string name="decrease_rate">Plus velocidad</string>
     <string name="increment_rate">Moins velocidad</string>
     <string name="tts_failed">Je suis désolé! TTS échoué&#8230;</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_text">Vous devez écrire quelque chose dans le \"bubble\". Ensuite, appuyez sur le bouton \"Parler\". C \'est facile!</string>
 
 </resources>
