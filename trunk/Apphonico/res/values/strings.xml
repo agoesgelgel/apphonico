@@ -13,5 +13,7 @@
     <string name="decrease_rate">Decrease Rate</string>
     <string name="increment_rate">Increment Rate</string>
     <string name="tts_failed">Sorry! Text To Speech failed&#8230;</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_text">You must write something on the speech bubble. After that, press the \"Speak!\" button. It\'s easy!</string>
 
 </resources>

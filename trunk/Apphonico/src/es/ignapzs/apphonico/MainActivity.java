@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import es.ignapzs.apphonico.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +101,13 @@ public class MainActivity extends Activity implements OnClickListener,
 		if (item.getItemId() == R.id.rate_double) {
 			myTTS.setSpeechRate(2);
 		}
+		// Show the instructions
+		if (item.getItemId() == R.id.instructions) {
+			Toast toasty = Toast.makeText(this,
+					getString(R.string.instructions_text), Toast.LENGTH_SHORT);
+			toasty.setGravity(Gravity.CENTER, 0, 0);
+			toasty.show();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -142,9 +149,14 @@ public class MainActivity extends Activity implements OnClickListener,
 				"onClick() del button");
 		String buttonOnText = speakButton.getText().toString();
 		if (buttonOnText.equals(getResources().getString(R.string.speak))) {
-			speakButton.setText(getResources().getString(R.string.shutup));
 			String speech = enteredText.getText().toString();
-			myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, speechParams);
+			if (speech.equals("")) {
+				Toast.makeText(this, getString(R.string.instructions_text),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				speakButton.setText(getResources().getString(R.string.shutup));
+				myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, speechParams);
+			}
 		} else if (buttonOnText.equals(getResources()
 				.getString(R.string.shutup))) {
 			speakButton.setText(getResources().getString(R.string.speak));
