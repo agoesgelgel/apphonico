@@ -10,8 +10,8 @@
     <string name="voice_options">Opzioni Vocali</string>
     <string name="decrease_pitch">Meno pitch</string>
     <string name="increment_pitch">Più pitch</string>
-    <string name="decrease_rate">Più velocitá</string>
-    <string name="increment_rate">Meno velocitá</string>
+    <string name="decrease_rate">Meno velocitá</string>
+    <string name="increment_rate">Più velocitá</string>
     <string name="tts_failed">Mi dispiace! TTS ha fallito&#8230;</string>
     <string name="instructions">Istruzione</string>
     <string name="instructions_text">Dovete scrivere qualcosa nella \"bolla\". Quindi premi il pulsante \"Parlare\". E facile!</string>
