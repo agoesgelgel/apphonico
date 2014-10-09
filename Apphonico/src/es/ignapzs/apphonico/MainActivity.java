@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import es.ignapzs.apphonico.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -29,7 +31,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	// TTS object
 	private TextToSpeech myTTS;
 	// status check code
-	private int myDataCheckCode = 0;
+	private static int myDataCheckCode = 0;
 	// Speach params
 	private HashMap<String, String> speechParams;
 
@@ -183,48 +185,60 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	// setup TTS
+	@SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
 	public void onInit(int initStatus) {
 		Log.d(getResources().getString(R.string.app_name), "onInit()");
 		// check for successful instantiation
 		if (initStatus == TextToSpeech.SUCCESS) {
 			if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
 				myTTS.setLanguage(Locale.US);
+			if (Build.VERSION.SDK_INT >= 15) {
 
-			myTTS.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+				myTTS.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
-				@Override
-				public void onStart(String utteranceId) {
-					Log.d(getResources().getString(R.string.app_name),
-							"onInit->onStart()");
-					speakButton.setText(getResources().getString(
-							R.string.speaking));
-				}
+					@Override
+					public void onStart(String utteranceId) {
+						Log.d(getResources().getString(R.string.app_name),
+								"onInit->onStart()");
+						speakButton.setText(getResources().getString(
+								R.string.speaking));
+					}
 
-				@Override
-				public void onError(String utteranceId) {
-					Log.e(getResources().getString(R.string.app_name),
-							"onInit->onError()");
-				}
+					@Override
+					public void onError(String utteranceId) {
+						Log.e(getResources().getString(R.string.app_name),
+								"onInit->onError()");
+					}
 
-				@Override
-				public void onDone(String utteranceId) {
-					Log.d(getResources().getString(R.string.app_name),
-							"onInit->onDone()");
+					@Override
+					public void onDone(String utteranceId) {
+						Log.d(getResources().getString(R.string.app_name),
+								"onInit->onDone()");
 
-					runOnUiThread(new Runnable() {
+						runOnUiThread(new Runnable() {
 
-						@Override
-						public void run() {
-							// UI changes
-							speakButton.setText(getResources().getString(
-									R.string.speak));
-						}
-					});
+							@Override
+							public void run() {
+								// UI changes
+								speakButton.setText(getResources().getString(
+										R.string.speak));
+							}
+						});
 
-				}
+					}
 
-			});
-
+				});
+			} else {
+				myTTS.setOnUtteranceCompletedListener(new TextToSpeech.OnUtteranceCompletedListener() {
+					@Override
+					public void onUtteranceCompleted(String utteranceId) {
+						// TODO Auto-generated method stub
+						Log.d(getResources().getString(R.string.app_name),
+								"progress on Completed " + utteranceId);
+					}
+				});
+			}
 		} else if (initStatus == TextToSpeech.ERROR) {
 			Log.e(getResources().getString(R.string.app_name),
 					"onInitStatus()- ERROR - " + getString(R.string.tts_failed));
