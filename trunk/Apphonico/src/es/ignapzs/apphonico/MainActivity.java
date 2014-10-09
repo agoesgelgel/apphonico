@@ -34,6 +34,8 @@ public class MainActivity extends Activity implements OnClickListener,
 	private static int myDataCheckCode = 0;
 	// Speach params
 	private HashMap<String, String> speechParams;
+	// The default locale
+	private Locale defLocale;
 
 	// create the Activity
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
 		// start the activity
 		startActivityForResult(checkTTSIntent, myDataCheckCode);
+
+		defLocale = null;
 	}
 
 	@Override
@@ -113,10 +117,19 @@ public class MainActivity extends Activity implements OnClickListener,
 		return super.onOptionsItemSelected(item);
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onResume() {
 		Log.d(getResources().getString(R.string.app_name), "onResume()");
 		if (myTTS != null) {
+			if (Build.VERSION.SDK_INT >= 15) {
+				defLocale = myTTS.getDefaultLanguage();
+			} else {
+				defLocale = myTTS.getLanguage();
+			}
+
+			myTTS.setLanguage(defLocale);
+
 			if (myTTS.isSpeaking()) {
 				speakButton.setText(getResources().getString(R.string.shutup));
 			} else {
@@ -126,10 +139,16 @@ public class MainActivity extends Activity implements OnClickListener,
 		super.onResume();
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onPause() {
 		Log.d(getResources().getString(R.string.app_name), "onPause()");
 		if (myTTS != null) {
+			if (Build.VERSION.SDK_INT <= 15) {
+				defLocale = myTTS.getLanguage();
+			} else {
+				defLocale = myTTS.getDefaultLanguage();
+			}
 			myTTS.stop();
 		}
 		super.onPause();
@@ -191,10 +210,11 @@ public class MainActivity extends Activity implements OnClickListener,
 		Log.d(getResources().getString(R.string.app_name), "onInit()");
 		// check for successful instantiation
 		if (initStatus == TextToSpeech.SUCCESS) {
-			if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
-				myTTS.setLanguage(Locale.US);
+			// Locale defLocale = myTTS.getDefaultLanguage();
+			// myTTS.setLanguage(defLocale);
 			if (Build.VERSION.SDK_INT >= 15) {
-
+				Locale defLocale = myTTS.getDefaultLanguage();
+				myTTS.setLanguage(defLocale);
 				myTTS.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
 					@Override
@@ -230,10 +250,11 @@ public class MainActivity extends Activity implements OnClickListener,
 
 				});
 			} else {
+				Locale defLocale = myTTS.getLanguage();
+				myTTS.setLanguage(defLocale);
 				myTTS.setOnUtteranceCompletedListener(new TextToSpeech.OnUtteranceCompletedListener() {
 					@Override
 					public void onUtteranceCompleted(String utteranceId) {
-						// TODO Auto-generated method stub
 						Log.d(getResources().getString(R.string.app_name),
 								"progress on Completed " + utteranceId);
 					}
