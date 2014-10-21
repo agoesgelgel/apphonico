@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/speak_button_shape"
         android:minWidth="150dp"
         android:text="@string/speak" />
 

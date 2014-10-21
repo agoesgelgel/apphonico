@@ -1,47 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_settings">
-    </item>
-    <item
         android:id="@+id/clear_text"
+        android:icon="@android:drawable/ic_notification_clear_all"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
         android:title="@string/clear_text">
     </item>
     <item
-        android:id="@+id/instructions"
-        android:orderInCategory="150"
-        android:title="@string/instructions">
+        android:id="@+id/preferences"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom"
+        android:title="@string/preferences">
     </item>
-
-    <group android:id="@+id/settings_group" >
-        <item
-            android:id="@+id/voice_options"
-            android:orderInCategory="200"
-            android:title="@string/voice_options">
-            <menu>
-                <item
-                    android:id="@+id/pitch_half"
-                    android:orderInCategory="100"
-                    android:title="@string/decrease_pitch"/>
-                <item
-                    android:id="@+id/pitch_double"
-                    android:orderInCategory="200"
-                    android:title="@string/increment_pitch"/>
-                <item
-                    android:id="@+id/rate_half"
-                    android:orderInCategory="300"
-                    android:title="@string/decrease_rate"/>
-                <item
-                    android:id="@+id/rate_double"
-                    android:orderInCategory="400"
-                    android:title="@string/increment_rate"/>
-            </menu>
-        </item>
-    </group>
 
 </menu>
