@@ -3,45 +3,49 @@ package es.ignapzs.apphonico;
 import java.util.HashMap;
 import java.util.Locale;
 
-import es.ignapzs.apphonico.R;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener,
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
+public class MainActivity extends SherlockActivity implements OnClickListener,
 		OnInitListener {
 	// The button for speaking
 	private Button speakButton;
 	// The text for speaking
 	private EditText enteredText;
 	// TTS object
-	private TextToSpeech myTTS;
+	private static TextToSpeech myTTS;
 	// status check code
 	private static int myDataCheckCode = 0;
 	// Speach params
 	private HashMap<String, String> speechParams;
 	// The default locale
 	private Locale defLocale;
+	// The shared preferences
+	private SharedPreferences sp;
 
 	// create the Activity
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d(getResources().getString(R.string.app_name), "onCreate()");
-
 		super.onCreate(savedInstanceState);
+
+		Log.d(getResources().getString(R.string.app_name), "onCreate()");
 
 		setContentView(R.layout.activity_main);
 		// get a reference to the button element listed in the XML layout
@@ -62,59 +66,48 @@ public class MainActivity extends Activity implements OnClickListener,
 		// start the activity
 		startActivityForResult(checkTTSIntent, myDataCheckCode);
 
+		// the default locale will be used later.
 		defLocale = null;
+		// get the shared preferences, so we could get different values later
+		sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// inflate the menu
-		getMenuInflater().inflate(R.menu.main, menu);
+		// Inflate the menu
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		// Change the menu icons
+		MenuItem item1 = menu.findItem(R.id.clear_text);
+		MenuItem item2 = menu.findItem(R.id.preferences);
+		item1.setIcon(R.drawable.clear_button_state);
+		item2.setIcon(R.drawable.menu_button_state);
 		return true;
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// preparation code here
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
 		// if we select the "clear text" option, we do it!
-		if (item.getItemId() == R.id.clear_text) {
+		case R.id.clear_text:
 			enteredText.getText().clear();
+			return true;
+			// Show the preferences
+		case R.id.preferences:
+			Intent in = new Intent(MainActivity.this,
+					MyPreferencesActivity.class);
+			startActivity(in);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		// if we choose the "settings", launch the tts settings
-		if (item.getItemId() == R.id.action_settings) {
-			Intent intent = new Intent();
-			intent.setAction("com.android.settings.TTS_SETTINGS");
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			this.startActivity(intent);
-		}
-		// if we click on the "decrease pitch" option, let it sound like a moose
-		if (item.getItemId() == R.id.pitch_half) {
-			myTTS.setPitch((float) 0.5);
-		}
-		// sound like a chipmunk if you say "increase pitch"
-		if (item.getItemId() == R.id.pitch_double) {
-			myTTS.setPitch(2);
-		}
-		// speak slowly
-		if (item.getItemId() == R.id.rate_half) {
-			myTTS.setSpeechRate((float) 0.5);
-		}
-		// speak twice faster
-		if (item.getItemId() == R.id.rate_double) {
-			myTTS.setSpeechRate(2);
-		}
-		// Show the instructions
-		if (item.getItemId() == R.id.instructions) {
-			Toast toasty = Toast.makeText(this,
-					getString(R.string.instructions_text), Toast.LENGTH_SHORT);
-			toasty.setGravity(Gravity.CENTER, 0, 0);
-			toasty.show();
-		}
-		return super.onOptionsItemSelected(item);
+
 	}
 
 	@SuppressLint("NewApi")
@@ -122,18 +115,31 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onResume() {
 		Log.d(getResources().getString(R.string.app_name), "onResume()");
 		if (myTTS != null) {
-			if (Build.VERSION.SDK_INT >= 15) {
+			if (Build.VERSION.SDK_INT >= 18) {
 				defLocale = myTTS.getDefaultLanguage();
 			} else {
 				defLocale = myTTS.getLanguage();
 			}
-
+			// TODO When the lollipop comes...
+			// defLocale = myTTS.getDefaultVoice().getLocale();
 			myTTS.setLanguage(defLocale);
 
 			if (myTTS.isSpeaking()) {
-				speakButton.setText(getResources().getString(R.string.shutup));
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						speakButton.setText(getResources().getString(
+								R.string.shutup));
+					}
+				});
 			} else {
-				speakButton.setText(getResources().getString(R.string.speak));
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						speakButton.setText(getResources().getString(
+								R.string.speak));
+					}
+				});
 			}
 		}
 		super.onResume();
@@ -144,11 +150,13 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onPause() {
 		Log.d(getResources().getString(R.string.app_name), "onPause()");
 		if (myTTS != null) {
-			if (Build.VERSION.SDK_INT <= 15) {
+			if (Build.VERSION.SDK_INT < 18) {
 				defLocale = myTTS.getLanguage();
 			} else {
 				defLocale = myTTS.getDefaultLanguage();
 			}
+			// TODO When the lollipop comes
+			// defLocale = myTTS.getVoice().getLocale();
 			myTTS.stop();
 		}
 		super.onPause();
@@ -171,16 +179,37 @@ public class MainActivity extends Activity implements OnClickListener,
 		String buttonOnText = speakButton.getText().toString();
 		if (buttonOnText.equals(getResources().getString(R.string.speak))) {
 			String speech = enteredText.getText().toString();
-			if (speech.equals("")) {
+			if (speech.equals("") || speech == null) {
 				Toast.makeText(this, getString(R.string.instructions_text),
 						Toast.LENGTH_SHORT).show();
 			} else {
-				speakButton.setText(getResources().getString(R.string.shutup));
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						speakButton.setText(getResources().getString(
+								R.string.shutup));
+					}
+				});
+				String pitch = sp.getString("pref_pitch", null);
+				String rate = sp.getString("pref_rate", null);
+				if (!((pitch == null) || (rate == null))) {
+					myTTS.setPitch(Float.parseFloat(pitch));
+					myTTS.setSpeechRate(Float.parseFloat(rate));
+				}
+				// TODO Check the method when the lollipop comes
 				myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, speechParams);
 			}
 		} else if (buttonOnText.equals(getResources()
-				.getString(R.string.shutup))) {
-			speakButton.setText(getResources().getString(R.string.speak));
+				.getString(R.string.shutup))
+				|| buttonOnText.equals(getResources().getString(
+						R.string.speaking))) {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					speakButton.setText(getResources()
+							.getString(R.string.speak));
+				}
+			});
 			myTTS.stop();
 		}
 
@@ -212,7 +241,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		if (initStatus == TextToSpeech.SUCCESS) {
 			// Locale defLocale = myTTS.getDefaultLanguage();
 			// myTTS.setLanguage(defLocale);
-			if (Build.VERSION.SDK_INT >= 15) {
+			if (Build.VERSION.SDK_INT >= 18) {
 				Locale defLocale = myTTS.getDefaultLanguage();
 				myTTS.setLanguage(defLocale);
 				myTTS.setOnUtteranceProgressListener(new UtteranceProgressListener() {
@@ -221,8 +250,16 @@ public class MainActivity extends Activity implements OnClickListener,
 					public void onStart(String utteranceId) {
 						Log.d(getResources().getString(R.string.app_name),
 								"onInit->onStart()");
-						speakButton.setText(getResources().getString(
-								R.string.speaking));
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								speakButton.setText(getResources().getString(
+										R.string.speaking));
+								speakButton.setText(getResources().getString(
+										R.string.shutup));
+							}
+						});
+
 					}
 
 					@Override
@@ -235,9 +272,7 @@ public class MainActivity extends Activity implements OnClickListener,
 					public void onDone(String utteranceId) {
 						Log.d(getResources().getString(R.string.app_name),
 								"onInit->onDone()");
-
 						runOnUiThread(new Runnable() {
-
 							@Override
 							public void run() {
 								// UI changes

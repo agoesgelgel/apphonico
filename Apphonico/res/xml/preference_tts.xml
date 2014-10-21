@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="pref_key_tts_settings"
+        android:title="@string/pref_title_tts" >
+        <Preference
+            android:icon="@drawable/ic_format_list_bulleted_grey"
+            android:key="pref_key_tts_system_settings"
+            android:summary="@string/pref_summary_tts_system"
+            android:title="@string/tts" >
+            <intent android:action="com.android.settings.TTS_SETTINGS" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_voice_settings"
+        android:title="@string/pref_title_voice" >
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/settings_header_pitchDialogTitle"
+            android:entries="@array/update_pitch_options"
+            android:entryValues="@array/update_pitch_values"
+            android:icon="@drawable/ic_swap_vert_grey"
+            android:key="pref_pitch"
+            android:summary="@string/pref_summary_voice_pitch_system"
+            android:title="@string/pref_name_voice_pitch_system" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/settings_header_rateDialogTitle"
+            android:entries="@array/update_rate_options"
+            android:entryValues="@array/update_rate_values"
+            android:icon="@drawable/ic_swap_horiz_grey"
+            android:key="pref_rate"
+            android:summary="@string/pref_summary_voice_rate_system"
+            android:title="@string/pref_name_voice_rate_system" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -2,18 +2,28 @@
 <resources>
 
     <string name="app_name">Apphonico</string>
-    <string name="action_settings">Configuración</string>
     <string name="clear_text">Borrar texto</string>
     <string name="speak">Hablar</string>
     <string name="shutup">Callar</string>
     <string name="speaking">¡Hablando!</string>
-    <string name="voice_options">Opciones de Voz</string>
-    <string name="decrease_pitch">Menos pitch</string>
-    <string name="increment_pitch">Más pitch</string>
-    <string name="decrease_rate">Menos velocidad</string>
-    <string name="increment_rate">Más velocidad</string>
     <string name="tts_failed">¡Lo sentimos! El sistema TTS falló&#8230;</string>
-    <string name="instructions">Instrucciones</string>
     <string name="instructions_text">Tienes que escribir algo en el \"bocadillo\". Después, pulsa el botón de \"Hablar\". ¡Es fácil!</string>
+    <string name="pref_title_tts">Configuración Text To Speech</string>
+    <string name="pref_name_tts_system">Configuración</string>
+    <string name="pref_summary_tts_system">Idioma y más</string>
+    <string name="pref_title_voice">Configuración de Voz</string>
+    <string name="pref_name_voice_pitch_system">Tono</string>
+    <string name="pref_summary_voice_pitch_system">¿Agudo o grave?</string>
+    <string name="pref_name_voice_rate_system">Velocidad</string>
+    <string name="pref_summary_voice_rate_system">¿Rápida o lenta?</string>
+    <string name="menu">Menú</string>
+    <string name="preferences">Preferencias</string>
+    <string name="settings_header_pitchDialogTitle">Selecciona el tono de voz deseado</string>
+    <string name="settings_header_rateDialogTitle">Selecciona la velocidad deseada</string>
+    <string name="contact_developer">Contacta con el desarrollador</string>
+    <string name="contact_developer_summary">Problemas, sugerencias, etc.</string>
+    <string name="information">Información</string>
+    <string name="tts">TTS</string>
+    <string name="what_do_you_want">Escribe aquí tu email</string>
 
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="update_pitch_options">
+        <item>Très grave</item>
+        <item>Grave</item>
+        <item>Normal</item>
+        <item>Forte</item>
+        <item>Très forte</item>
+    </string-array>
+    <string-array name="update_pitch_values">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="update_rate_options">
+        <item>Très lentement</item>
+        <item>Slow</item>
+        <item>Normal</item>
+        <item>Rapide</item>
+        <item>Très rapide</item>
+    </string-array>
+    <string-array name="update_rate_values">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+    </string-array>
+
+</resources>

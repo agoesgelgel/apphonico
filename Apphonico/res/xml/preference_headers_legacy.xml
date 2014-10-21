@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference android:title="@string/pref_name_tts_system" >
+        <intent
+            android:action="prefs_display"
+            android:targetClass="es.ignapzs.apphonico.MyPreferencesActivity"
+            android:targetPackage="es.ignapzs.apphonico" >
+        </intent>
+    </Preference>
+    <Preference android:title="@string/information" >
+        <intent
+            android:action="prefs_info"
+            android:targetClass="es.ignapzs.apphonico.MyPreferencesActivity"
+            android:targetPackage="es.ignapzs.apphonico" >
+        </intent>
+    </Preference>
+
+</PreferenceScreen>

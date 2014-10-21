@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <header
+        android:fragment="es.ignapzs.apphonico.TTSPreferenceFragment"
+        android:title="@string/pref_name_tts_system" >
+    </header>
+    <header
+        android:fragment="es.ignapzs.apphonico.ContactPreferenceFragment"
+        android:title="@string/information" >
+    </header>
+
+</preference-headers>

@@ -2,18 +2,28 @@
 <resources>
 
     <string name="app_name">Apphonico</string>
-    <string name="action_settings">Impostazioni</string>
     <string name="clear_text">Cancelare</string>
     <string name="speak">Parlare</string>
     <string name="shutup">Zitto!</string>
     <string name="speaking">Parlando!</string>
-    <string name="voice_options">Opzioni Vocali</string>
-    <string name="decrease_pitch">Meno pitch</string>
-    <string name="increment_pitch">Più pitch</string>
-    <string name="decrease_rate">Meno velocitá</string>
-    <string name="increment_rate">Più velocitá</string>
     <string name="tts_failed">Mi dispiace! TTS ha fallito&#8230;</string>
-    <string name="instructions">Istruzione</string>
     <string name="instructions_text">Dovete scrivere qualcosa nella \"bolla\". Quindi premi il pulsante \"Parlare\". E facile!</string>
+    <string name="pref_title_tts">Text To Speech Impostazioni</string>
+    <string name="pref_name_tts_system">Impostazioni</string>
+    <string name="pref_summary_tts_system">Lingua &amp; molti di più</string>
+    <string name="pref_title_voice">Impostazioni vocali</string>
+    <string name="pref_name_voice_pitch_system">Intonazione</string>
+    <string name="pref_summary_voice_pitch_system">Acuta o triste?</string>
+    <string name="pref_name_voice_rate_system">Velocitá</string>
+    <string name="pref_summary_voice_rate_system">Veloce o lento?</string>
+    <string name="menu">Menu</string>
+    <string name="preferences">Preferenze</string>
+    <string name="settings_header_pitchDialogTitle">Selezionare il tono desiderato</string>
+    <string name="settings_header_rateDialogTitle">Selezionare la velocità desiderata</string>
+    <string name="contact_developer">Contatta con lo sviluppatore</string>
+    <string name="contact_developer_summary">Ditemi i vostri problemi, suggerimenti, quello che vuoi!</string>
+    <string name="information">Informazioni</string>
+    <string name="tts">TTS</string>
+    <string name="what_do_you_want">Scrivi qui la tua e-mail</string>
 
 </resources>
